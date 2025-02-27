@@ -1,22 +1,31 @@
+
+from scipy.integrate import quad
 def fact(n):
-	"""Computes the factorial of a natural number.
-	
-	Pre: -
-	Post: Returns the factorial of 'n'.
-	Throws: ValueError if n < 0
-	"""
-	pass
+    assert n>= 0
+    res = 1
+    while n > 0:
+        res*=n
+        n= n-1
+    return res	
 
 def roots(a, b, c):
-	"""Computes the roots of the ax^2 + bx + x = 0 polynomial.
-	
-	Pre: -
-	Post: Returns a tuple with zero, one or two elements corresponding
-		to the roots of the ax^2 + bx + c polynomial.
-	"""
-	pass
+    delta= b**2 - 4*a*c
+    if delta > 0:
+        x1= (-b-(delta**0.5))/(2*a)
+        x2= (-b+(delta**0.5))/(2*a)
+        sol=x1, x2
+    if delta == 0:
+        x0= -b/(2*a)
+        sol=x0
+    if delta < 0:
+        sol= "No solution"
+    return sol
 
 def integrate(function, lower, upper):
+	def fun(x):
+		return eval(function)
+	return quad(fun, lower, upper)[0]
+
 	"""Approximates the integral of a fonction between two bounds
 	
 	Pre: 'function' is a valid Python expression with x as a variable,
@@ -29,7 +38,6 @@ def integrate(function, lower, upper):
 		you'll probably need the 'eval' function to evaluate the function
 		to integrate given as a string.
 	"""
-	pass
 
 if __name__ == '__main__':
 	print(fact(5))
